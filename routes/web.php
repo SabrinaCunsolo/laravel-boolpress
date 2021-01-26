@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+//Homepage pubblica
+Route::get('/', 'HomeController@index')->name('index');
 
 Auth::routes();
 
-Route::get('/home', 'Admin\HomeController@index')->name('dashboard')->middleware('auth');
+//Tutte le rotte inserite in questo gruppo hanno il nome che inizia con admin. es. admin.index
+Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
+    Route::get('/', 'HomeController@index')->name('index');
+});
