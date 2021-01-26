@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Post;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 class PostsTableSeeder extends Seeder
 {
@@ -21,6 +22,19 @@ class PostsTableSeeder extends Seeder
             $new_post->text     = $faker->text();
             $new_post->author   = $faker->name();
             $new_post->date     = $faker->date();
+            //genero slug
+            $slug               = Str::slug($new_post->title);
+            $slug_base          = $slug;
+            //devo verif che lo slug non esista già nel db
+            $post_presente      = Post::where('slug', $slug)->first();
+            $contatore          = 1;
+            while ($post_presente) {
+                $slug           = $slug_base . '-' . $contatore;
+                $contatore++;
+                $post_presente  = Post::where('slug', $slug)->first();
+            }
+            //assegno slug al post
+            $new_post->slug     = $slug;
             $new_post->save();
         }
 

@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->longtext('text');
             $table->string('author');
             $table->date('date');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
