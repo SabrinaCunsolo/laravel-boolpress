@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 //Homepage pubblica
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/contatti', 'HomeController@contatti')->name('contatti');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 //Tutte le rotte inserite in questo gruppo hanno il nome che inizia con admin. es. admin.index
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
