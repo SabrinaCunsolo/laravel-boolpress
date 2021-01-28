@@ -5,10 +5,12 @@
         <div class="row">
             <div class="col-12">
                 <h2>Tutti i post</h2>
-                <ul>
+                <ul class="list-unstyled list-group list-group-flush">
                     @foreach ($posts as $post)
-                        <li>
-                            {{ $post->title}}
+                        <li class="list-group-item list-group-item-info list-group-item-action">
+                            <a class="" href="{{ route('posts.show', ['post' => $post->id])}}">
+                                    {{ $post->title}}
+                            </a>
                         </li>
                     @endforeach
                 </ul>
