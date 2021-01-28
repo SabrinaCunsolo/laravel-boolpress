@@ -8,7 +8,7 @@
                 <ul class="list-unstyled list-group list-group-flush">
                     @foreach ($posts as $post)
                         <li class="list-group-item list-group-item-info list-group-item-action">
-                            <a class="" href="{{ route('posts.show', ['post' => $post->id])}}">
+                            <a class="" href="{{ route('posts.show', ['slug' => $post->slug])}}">
                                     {{ $post->title}}
                             </a>
                         </li>
