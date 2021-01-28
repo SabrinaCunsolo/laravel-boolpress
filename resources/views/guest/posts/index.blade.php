@@ -10,9 +10,6 @@
                         <li>
                             {{ $post->title}}
                         </li>
-                        <li>
-                            {{ $post->title}}
-                        </li>
                     @endforeach
                 </ul>
             </div>
