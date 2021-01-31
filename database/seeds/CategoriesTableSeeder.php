@@ -15,7 +15,7 @@ class CategoriesTableSeeder extends Seeder
     {
         for ($i=0; $i < 5; $i++) {
             $new_category = new Category();
-            $new_category->name = $faker->words(3, true);
+            $new_category->name = $faker->words(2, true);
             //genero slug
             $slug = Str::slug($new_category->name);
             $slug_base = $slug;

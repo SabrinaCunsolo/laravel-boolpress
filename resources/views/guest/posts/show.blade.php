@@ -8,6 +8,7 @@
                 <h3>{{ $post->subtitle}}</h3>
                 <p>{{ $post->text}}</p>
                 <p>{{ $post->author}}</p>
+                <p>Categoria: {{ $post->category ? $post->category->name : '-' }} </p>
             </div>
         </div>
     </div>
