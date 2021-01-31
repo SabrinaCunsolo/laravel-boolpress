@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -31,7 +32,8 @@ class PostController extends Controller
     public function create()
     {
         $data = [
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags' => Tag::all()
         ];
         return view('admin.posts.create', $data);
     }
@@ -61,6 +63,8 @@ class PostController extends Controller
         // se slug non esiste nel db assegno lo slug al post
         $new_post->slug = $slug;
         $new_post->save();
+
+        $new_post->tags()->sync($form_data['tags']);
         return redirect()->route('admin.posts.index');
     }
 
@@ -93,7 +97,8 @@ class PostController extends Controller
 
         $data = [
             'post' => $post,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags' => Tag::all()
         ];
 
         return view('admin.posts.edit', $data);
@@ -124,6 +129,7 @@ class PostController extends Controller
             $form_data['slug'] = $slug;
         }
         $post->update($form_data);
+        $post->tags()->sync($form_data['tags']);
         return redirect()->route('admin.posts.index');
     }
 
@@ -135,6 +141,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->sync([]);
         $post->delete();
         return redirect()->route('admin.posts.index');
     }
